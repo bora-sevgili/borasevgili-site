@@ -1,0 +1,57 @@
+<!doctype html>
+<!-- Adapted from Editorial by HTML5 UP (CC BY 3.0). -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Field notes about public DNS, TXT records, and HTTPS.">
+  <title>Lab Notes | Bora Sevgili</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="scripts/main.js" defer></script><script src="scripts/skull.js" defer></script><script src="scripts/kinetic.js" defer></script><script src="scripts/flag.js" defer></script>
+  <script src="scripts/lab-notes.js" defer></script>
+</head>
+<body>
+  <div id="skull" aria-hidden="true"><pre></pre></div>
+  <a class="skip" href="#main">Skip to content</a>
+  <div id="wrapper">
+    <header id="header">
+      <div class="inner top">
+        <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">[&gt;_]</span> BORA SEVGILI<span id="flag" aria-hidden="true"></span></a>
+        <button class="menu-toggle" type="button" aria-controls="menu" aria-expanded="true" hidden>Menu</button>
+        <nav id="menu" aria-label="Main navigation"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="lab-notes.html" aria-current="page">Lab Notes</a></nav>
+      </div>
+    </header>
+    <main id="main">
+<section class="inner subhero">
+  <h1 class="kin">Lab notes<span class="period">.</span></h1>
+  <p>Short notes from setting up DNS and HTTPS for this site.</p>
+</section>
+<section class="inner notes" aria-label="Lab notes">
+  <div class="filters" role="group" aria-label="Filter notes by topic" hidden>
+    <button type="button" data-filter="all" aria-pressed="true">All</button>
+    <button type="button" data-filter="dns" aria-pressed="false">DNS</button>
+    <button type="button" data-filter="https" aria-pressed="false">HTTPS</button>
+    <span id="note-count" role="status"></span>
+  </div>
+  <article id="dns" class="note" data-topic="dns">
+    <p class="eyeline">DNS / TXT RECORDS</p>
+    <h2>Query the right name</h2>
+    <p>A TXT record attaches text to a DNS name. At the root of my domain, I could see the assignment record and an SPF record in the same answer. GitHub’s verification record lived at a separate name, so I checked that name directly.</p>
+    <pre class="command"><code>nslookup -type=TXT borasevgili.me. 8.8.8.8</code></pre>
+    <p>Comparing a query to Namecheap’s authoritative nameserver with one to a public resolver helped me tell when a record had been published and when it was visible to others.</p>
+  </article>
+  <article id="https" class="note" data-topic="https">
+    <p class="eyeline">HTTPS / TLS</p>
+    <h2>A valid certificate and a redirect are separate checks</h2>
+    <p>After GitHub passed the DNS check, HTTPS started working while the <strong>Enforce HTTPS</strong> box was still unavailable. I could load the site over HTTPS before plain HTTP was configured to redirect.</p>
+    <p>I check the HTTPS URL directly for a browser certificate warning. I check the HTTP URL separately to see where it redirects. That distinction made the status messages in GitHub Pages easier to understand.</p>
+  </article>
+</section></main>
+    <footer class="inner footer">
+      <div><strong>Bora Sevgili</strong><br><a class="credit" href="https://html5up.net/editorial">Adapted from Editorial by HTML5 UP</a></div>
+      <div class="social"><a href="https://github.com/bora-sevgili">GitHub</a><a href="https://www.linkedin.com/in/bahadir-bora-sevgili-290957433/">LinkedIn</a></div>
+      <button id="motion-toggle" type="button" aria-pressed="false">Pause motion</button>
+    </footer>
+  </div>
+</body>
+</html>
